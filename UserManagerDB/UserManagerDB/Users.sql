@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[Users]
+(
+	[UserId] INT CONSTRAINT PK_Users_UserId PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[Email] NVARCHAR(50) NOT NULL,
+	[Password] NVARCHAR(50) NOT NULL,
+	[Name] NVARCHAR(30) NOT NULL,
+	[RegistrationDate] DATE NOT NULL,
+	[LoginDate] DATE NOT NULL,
+	[State] TINYINT DEFAULT 2 NOT NULL,
+	[Delisted] BIT DEFAULT 0 NOT NULL
+
+)
