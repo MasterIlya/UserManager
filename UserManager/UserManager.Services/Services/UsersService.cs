@@ -97,7 +97,8 @@ namespace UserManager.Services.Services
             foreach (var id in ids)
             {
                 var item = _usersRepository.Get(id);
-                _usersRepository.Remove(item);
+                item.Delisted = true;
+                _usersRepository.Update(item);
             }
 
         }
