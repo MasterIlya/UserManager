@@ -15,6 +15,7 @@ namespace UserManager.Repositories.Repositories
         public List<UserItem> Get(int skip, int take)
         {
             return GetItems()
+                .Where(x => !x.Delisted)
                 .OrderBy(x => x.UserId)
                 .Skip(skip)
                 .Take(take)
@@ -23,12 +24,12 @@ namespace UserManager.Repositories.Repositories
 
         public UserItem GetByEmail(string email)
         {
-            return GetItems().FirstOrDefault(x => x.Email == email.Trim().ToLower() && x.Delisted == false);
+            return GetItems().FirstOrDefault(x => x.Email == email.Trim().ToLower() && !x.Delisted);
         }
 
         public int GetCount()
         {
-            return GetItems().Count();
+            return GetItems().Where(x => !x.Delisted).Count();
         }
     }
 }
