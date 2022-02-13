@@ -11,7 +11,7 @@ namespace UserManager.Services.Services
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
-        private const int DefaultUsersCount = 3;
+        private const int DefaultUsersCount = 5;
         private const int DefaultCurrentPage = 1;
 
         public UsersService(IUsersRepository usersRepository)
