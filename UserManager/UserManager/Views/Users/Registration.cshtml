@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/Registration.css" />
     <link href="~/css/bootstrap.min.css" rel="stylesheet">
-    <title>Регистрации</title>
+    <title>Registration</title>
 </head>
 
 <body>
@@ -16,32 +16,32 @@
         <div class="register-form-container">
             <form asp-controller="users" asp-action="registration" method="POST">
                 <h1 class="form-title">
-                    Регистрация
+                    Registration
                 </h1>
                 <div class="form-fields">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-field">
-                        <input type="email" asp-for="Email" placeholder="Почта">
+                        <input type="email" asp-for="Email" placeholder="Email">
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-field">
-                        <input type="password" asp-for="Password" placeholder="Пароль">
+                        <input type="password" asp-for="Password" placeholder="Password">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-field">
-                        <input type="password" asp-for="PasswordConfirm" placeholder="Подтверждение пароля">
+                        <input type="password" asp-for="PasswordConfirm" placeholder="Confirm Password">
                         <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
                     </div>
                     <div class="form-field">
-                        <input type="text" asp-for="Name" placeholder="Имя">
+                        <input type="text" asp-for="Name" placeholder="Name">
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-buttons">
-                    <button class="button" type ="submit">Регистрация</button>
+                    <button class="button" type ="submit">Registration</button>
                 </div>
                 <div>
-                    <a href='@Url.Action("Authentication", "Users")'>Есть аккаунт? Войти</a>
+                    <a href='@Url.Action("Authentication", "Users")'>Have an account? Login</a>
                 </div>
             </form>
         </div>
