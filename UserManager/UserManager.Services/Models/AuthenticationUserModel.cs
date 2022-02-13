@@ -4,10 +4,10 @@ namespace UserManager.Services.Models
 {
     public class AuthenticationUserModel
     {
-        [Required(ErrorMessage = "Не указан электронный адрес")]
-        [EmailAddress(ErrorMessage = "Неккоректный электронный адрес")]
+        [Required(ErrorMessage = "Email not specified")]
+        [EmailAddress(ErrorMessage = "Incorrect email")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Не указан пароль")]
+        [Required(ErrorMessage = "Password not specified")]
         public string Password { get; set; }
     }
 }
