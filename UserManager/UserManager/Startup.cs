@@ -38,6 +38,7 @@ namespace UserManager
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthentication();

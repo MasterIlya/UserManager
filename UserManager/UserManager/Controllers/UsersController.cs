@@ -29,7 +29,7 @@ namespace UserManager.Controllers
                 {
                     _usersService.CreateUser(model);
 
-                    return RedirectToAction("Authentication");
+                    return View("SuccessRegistration");
                 }
                 else
                 {
