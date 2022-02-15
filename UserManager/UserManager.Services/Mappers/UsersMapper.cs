@@ -46,21 +46,6 @@ namespace UserManager.Services.Mappers
             };
         }
 
-        public static AuthenticationUserModel MapForAuthentication(UserItem item)
-        {
-            if(item == null)
-            {
-                return null;
-            }
-
-            return new AuthenticationUserModel
-            {
-                Email = item.Email,
-                Password = item.Password
-            };
-        }
-
-
         public static PaginationUserModel  Map(List<UserModel> generalUserModels, int countOfPages, int currentPage)
         {
             return new PaginationUserModel

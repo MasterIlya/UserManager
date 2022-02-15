@@ -22,5 +22,24 @@ namespace UserManager.Repositories.Repositories
                 .ToList();
         }
 
+        public List<MessageItem> GetBySenderId(int senderId, int skip, int take)
+        {
+            return GetItems()
+                .Where(x => x.SenderId == senderId)
+                .OrderBy(x => x.Date)
+                .Skip(skip)
+                .Take(take)
+                .ToList();
+        }
+
+        public int GetCountForRecipient(int recipientId)
+        {
+            return GetItems().Where(x => x.RecipientId == recipientId).Count();
+        }
+
+        public int GetCountForSender(int senderId)
+        {
+            return GetItems().Where(x => x.SenderId == senderId).Count();
+        }
     }
 }
