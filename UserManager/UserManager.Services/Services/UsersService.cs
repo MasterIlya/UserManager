@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UserManager.Commons.Enums;
 using UserManager.Repositories.Interfaces;
@@ -101,6 +102,13 @@ namespace UserManager.Services.Services
                 _usersRepository.Update(item);
             }
 
+        }
+
+        public List<UserModel> GetAllUsers()
+        {
+            var items = _usersRepository.Get();
+
+            return items.Select(x => UsersMapper.Map(x)).ToList();
         }
     }
 }

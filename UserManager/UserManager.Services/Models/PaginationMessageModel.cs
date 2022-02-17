@@ -2,9 +2,9 @@
 
 namespace UserManager.Services.Models
 {
-    public class PaginationMessageModel
+    public class PaginationMessageModel<T>
     {
-        public List<MessageModel> MessageModels { get; set; }
+        public List<T> MessageModels { get; set; }
         public int CountOfPages { get; set; }
         public int CurrentPage { get; set; }
     }

@@ -22,6 +22,14 @@ namespace UserManager.Repositories.Repositories
                 .ToList();
         }
 
+        public List<UserItem> Get()
+        {
+            return GetItems()
+                .Where(x => !x.Delisted)
+                .OrderBy(x => x.UserId)
+                .ToList();
+        }
+
         public UserItem GetByEmail(string email)
         {
             return GetItems().FirstOrDefault(x => x.Email == email.Trim().ToLower() && !x.Delisted);

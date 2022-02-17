@@ -11,7 +11,7 @@ namespace UserManager.Repositories.Items
         public virtual int MessageId { get; set; }
         public virtual int SenderId { get; set; }
         public virtual int RecipientId { get; set; }
-        public virtual DateTime Date { get; set; }
+        public virtual DateTime CreatedDate { get; set; }
         public virtual string MessageTopic { get; set; }
         public virtual string MessageText { get; set; }
         public virtual bool Readed { get; set; }

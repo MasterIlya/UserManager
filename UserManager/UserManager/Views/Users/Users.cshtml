@@ -22,6 +22,9 @@
                     <button class="btn btn-outline-danger" type="submit" style="margin-right: 10px" id="third" value="delete" name="btn">Delete checked</button>
                 </li>
                 <li class="nav-item">
+                    <a class="btn btn-outline-success" asp-controller="messages" asp-action="getinbox" asp-route-recipientId="@User.FindFirstValue(ClaimTypes.NameIdentifier)" style="margin-right: 10px">Your messages</a>
+                </li>
+                <li class="nav-item">
                     <a class="btn btn-outline-primary" asp-controller="users" asp-action="logout">LogOut</a>
                 </li>
             </ul>

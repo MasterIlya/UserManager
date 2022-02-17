@@ -1,4 +1,5 @@
-﻿using UserManager.Services.Models;
+﻿using System.Collections.Generic;
+using UserManager.Services.Models;
 
 namespace UserManager.Services.IServices
 {
@@ -12,5 +13,6 @@ namespace UserManager.Services.IServices
         public void BlockUsers(int[] ids);
         public void UnblockUsers(int[] ids);
         public void DeleteUsers(int[] ids);
+        public List<UserModel> GetAllUsers();
     }
 }

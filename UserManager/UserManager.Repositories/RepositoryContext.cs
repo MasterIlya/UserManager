@@ -11,6 +11,7 @@ namespace UserManager.Repositories
         private readonly string _conectionString;
 
         public DbSet<UserItem> UserItems { get; set; }
+        public DbSet<MessageItem> MessageItems { get; set; }
 
 
         public RepositoryContext(string conectionString)

@@ -65,7 +65,7 @@ namespace UserManager.Controllers
                 if (user != null && user.State != StateTypes.BLOCKED && user.Password == userModel.Password)
                 {
 
-                    await Authenticate(user.UserId);
+                    await Authenticate(user.UserId, user.Email);
                     _usersService.UpdateLoginDate(userModel);
                     return RedirectToAction("GetUsers");
 
@@ -107,11 +107,12 @@ namespace UserManager.Controllers
 
         }
 
-        private async Task Authenticate(int userId)
+        private async Task Authenticate(int userId, string email)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Email, email)
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 

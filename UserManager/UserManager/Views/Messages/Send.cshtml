@@ -1,0 +1,44 @@
+﻿@model CompositeModel
+
+@{
+    ViewData["Title"] = "Send";
+    Layout = "_Layout";
+}
+<html lang="en">
+<body>
+    <div class="container">
+        <form asp-action="send" asp-controller="messages">
+            <div class="form-group">
+                <label for="example-text-input" class="col-xs-2 col-form-label">Your Email</label>
+                <div class="col-xs-10">
+                    <input class="form-control" type="email" asp-for="messageModel.SenderEmail" value="@User.FindFirstValue(ClaimTypes.Email)" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="example-text-input" class="col-xs-2 col-form-label">Received Email</label>
+                <select class="form-control" asp-for="messageModel.RecipientEmail">
+                    @foreach (var user in Model.users)
+                    {
+                        <option>@user.Email</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="example-text-input" class="col-xs-2 col-form-label">Topic</label>
+                <div class="col-xs-10">
+                    <input class="form-control" type="text" asp-for="messageModel.MessageTopic" placeholder="your topic">
+                    <span asp-validation-for="messageModel.MessageTopic" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="example-text-input" class="col-xs-2 col-form-label">Text</label>
+                <div class="col-xs-10">
+                    <textarea class="form-control" asp-for="messageModel.MessageText" rows="5" placeholder="your text"></textarea>
+                    <span asp-validation-for="messageModel.MessageText" class="text-danger"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:10px">Send</button>
+        </form>
+    </div>
+</body>
+</html>

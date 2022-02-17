@@ -7,7 +7,7 @@ namespace UserManager.Services.Mappers
 {
     public class MessagesMapper
     {
-        public static MessageItem Map(SendMessageModel model)
+        public static MessageItem Map(SendMessageModel model, int senderId, int recipientId)
         {
             if (model == null)
             {
@@ -16,37 +16,66 @@ namespace UserManager.Services.Mappers
 
             return new MessageItem
             {
-                SenderId = model.SenderId,
-                RecipientId = model.RecipientId,
-                Date = DateTime.Now,
+                SenderId = senderId,
+                RecipientId = recipientId,
+                CreatedDate = DateTime.Now,
                 MessageText = model.MessageText,
                 MessageTopic = model.MessageTopic,
                 Readed = false
             };
         }
 
-        public static MessageModel Map(MessageItem item)
+        public static SentMessageModel MapForSentMessage(MessageItem item, string recipientEmail)
         {
             if (item == null)
             {
                 return null;
             }
 
-            return new MessageModel
+            return new SentMessageModel
             {
                 MessageId = item.MessageId,
                 SenderId = item.SenderId,
-                RecipientId = item.RecipientId,
-                Date = item.Date,
+                RecipinetEmail = recipientEmail,
+                Date = item.CreatedDate,
                 MessageTopic = item.MessageTopic,
                 MessageText = item.MessageText,
                 Readed = item.Readed
             };
         }
 
-        public static PaginationMessageModel Map(List<MessageModel> generalMessageModels, int countOfPages, int currentPage)
+        public static InboxMessageModel MapForReceivedMessage(MessageItem item, string senderEmail)
         {
-            return new PaginationMessageModel
+            if (item == null)
+            {
+                return null;
+            }
+
+            return new InboxMessageModel
+            {
+                MessageId = item.MessageId,
+                SenderEmail = senderEmail,
+                RecipinetId = item.RecipientId,
+                Date = item.CreatedDate,
+                MessageTopic = item.MessageTopic,
+                MessageText = item.MessageText,
+                Readed = item.Readed
+            };
+        }
+
+        public static PaginationMessageModel<SentMessageModel> Map(List<SentMessageModel> generalMessageModels, int countOfPages, int currentPage)
+        {
+            return new PaginationMessageModel<SentMessageModel>
+            {
+                MessageModels = generalMessageModels,
+                CountOfPages = countOfPages,
+                CurrentPage = currentPage
+            };
+        }
+
+        public static PaginationMessageModel<InboxMessageModel> Map(List<InboxMessageModel> generalMessageModels, int countOfPages, int currentPage)
+        {
+            return new PaginationMessageModel<InboxMessageModel>
             {
                 MessageModels = generalMessageModels,
                 CountOfPages = countOfPages,

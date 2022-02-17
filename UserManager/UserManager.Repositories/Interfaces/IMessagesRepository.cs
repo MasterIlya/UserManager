@@ -7,6 +7,7 @@ namespace UserManager.Repositories.Interfaces
     {
         void Create(MessageItem item);
         MessageItem Get(int MessageId);
+        void Update(MessageItem item);
         public List<MessageItem> GetByRecipientId(int recipientId, int skip, int take);
         public List<MessageItem> GetBySenderId(int senderId, int skip, int take);
         public int GetCountForRecipient(int recipientId);

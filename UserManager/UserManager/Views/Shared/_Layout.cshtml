@@ -1,0 +1,26 @@
+﻿<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+</head>
+<header class="container">
+    <ul class="nav justify-content-start " style="margin-top: 10px; margin-bottom: 10px">
+        <li class="nav-item">
+            <a class="btn btn-outline-success" asp-controller="messages" asp-action="send" style="margin-right: 10px">CreateMessage</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-success" asp-controller="messages" asp-action="getinbox" asp-route-recipientId="@User.FindFirstValue(ClaimTypes.NameIdentifier)" style="margin-right: 10px">Inbox</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-success" asp-controller="messages" asp-action="getsent" asp-route-senderId="@User.FindFirstValue(ClaimTypes.NameIdentifier)" style="margin-right: 10px">Sent</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-success" asp-controller="users" asp-action="getusers" style="margin-right: 10px">Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-primary" asp-controller="users" asp-action="logout">LogOut</a>
+        </li>
+    </ul>
+</header>
+@RenderBody()
