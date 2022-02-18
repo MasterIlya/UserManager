@@ -3,7 +3,7 @@
 	[MessageId] INT CONSTRAINT PK_Messages_MessageId PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[SenderId] INT NOT NULL,
 	[RecipientId] INT NOT NULL,
-	[CreatedDate] DATE NOT NULL,
+	[CreatedDate] DATETIME NOT NULL,
 	[MessageTopic] NVARCHAR(50) NOT NULL,
 	[MessageText] NVARCHAR(1000) NOT NULL,
 	[Readed] BIT DEFAULT 0 NOT NULL

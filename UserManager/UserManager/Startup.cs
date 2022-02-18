@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UserManager.Configuration;
 using UserManager.Filters;
+using UserManager.Services.Hubs;
 
 namespace UserManager
 {
@@ -12,6 +13,7 @@ namespace UserManager
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(AuthenticateFilter));
@@ -26,6 +28,7 @@ namespace UserManager
                 }); ;
             services.AddAuthorization();
             services.AddControllersWithViews();
+            services.AddMemoryCache();
 
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
@@ -49,7 +52,11 @@ namespace UserManager
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Users}/{action=Authentication}/{id?}");
+
+                endpoints.MapHub<NotificationHub>("/notification");
+                endpoints.MapDefaultControllerRoute();
             });
+
         }
     }
 }

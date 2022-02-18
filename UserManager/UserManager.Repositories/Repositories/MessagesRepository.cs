@@ -16,7 +16,7 @@ namespace UserManager.Repositories.Repositories
         {
             return GetItems()
                 .Where(x => x.RecipientId == recipientId)
-                .OrderBy(x => x.CreatedDate)
+                .OrderByDescending(x => x.CreatedDate)
                 .Skip(skip)
                 .Take(take)
                 .ToList();
@@ -26,7 +26,7 @@ namespace UserManager.Repositories.Repositories
         {
             return GetItems()
                 .Where(x => x.SenderId == senderId)
-                .OrderBy(x => x.CreatedDate)
+                .OrderByDescending(x => x.CreatedDate)
                 .Skip(skip)
                 .Take(take)
                 .ToList();

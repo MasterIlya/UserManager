@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Threading.Tasks;
 using UserManager.Services.IServices;
 using UserManager.Services.Models;
 
@@ -14,6 +17,7 @@ namespace UserManager.Controllers
         {
             _messagesService = messagesService;
             _usersService = usersService;
+
         }
 
         [HttpGet]
@@ -30,11 +34,11 @@ namespace UserManager.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Send(CompositeModel model)
+        public async Task<IActionResult> Send(CompositeModel model)
         {
             if (ModelState.IsValid)
             {
-                _messagesService.CreateMessage(model.messageModel);
+                await _messagesService.CreateMessageAsync(model.messageModel);
                 var senderId = _usersService.GetUserByEmail(model.messageModel.SenderEmail).UserId;
 
                 return RedirectToAction("GetSent", new { senderId });
@@ -70,6 +74,8 @@ namespace UserManager.Controllers
         {
             _messagesService.UpdateMessageState(messageId);
         }
+
+
 
     }
 }

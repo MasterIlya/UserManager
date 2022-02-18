@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 using UserManager.Repositories.Interfaces;
+using UserManager.Services.Hubs;
 using UserManager.Services.IServices;
 using UserManager.Services.Mappers;
 using UserManager.Services.Models;
@@ -11,23 +14,31 @@ namespace UserManager.Services.Services
     {
         private readonly IMessagesRepository _messagesRepository;
         private readonly IUsersRepository _usersRepository;
+        private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly IHubConnectionService _hubConnectionService;
         private const int DefaultMessageCount = 5;
         private const int DefaultCurrentPage = 1;
 
-        public MessagesService(IMessagesRepository messagesRepository, IUsersRepository usersRepository)
+        public MessagesService(IMessagesRepository messagesRepository, IUsersRepository usersRepository,
+            IHubContext<NotificationHub> hubContext, IHubConnectionService hubConnectionService)
         {
             _usersRepository = usersRepository;
             _messagesRepository = messagesRepository;
+            _hubContext = hubContext;
+            _hubConnectionService = hubConnectionService;
         }
 
-        public void CreateMessage(SendMessageModel model)
+        public async Task CreateMessageAsync(SendMessageModel model)
         {
             var recipientId = _usersRepository.GetByEmail(model.RecipientEmail).UserId;
             var senderId = _usersRepository.GetByEmail(model.SenderEmail).UserId;
-
+            var connectionId = _hubConnectionService.GetFromCache(recipientId);
+            
             var item = MessagesMapper.Map(model, senderId, recipientId);
 
             _messagesRepository.Create(item);
+
+            await _hubContext.Clients.Client(connectionId).SendAsync("Notify", recipientId.ToString());
         }
 
         public PaginationMessageModel<InboxMessageModel> GetInbox(int recipientId, int currentPage)

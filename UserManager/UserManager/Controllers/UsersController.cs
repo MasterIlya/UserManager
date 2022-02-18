@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UserManager.Commons.Enums;
 using UserManager.Services.IServices;
 using UserManager.Services.Models;
+using Microsoft.AspNetCore.SignalR;
 
 namespace UserManager.Controllers
 {
@@ -81,6 +82,7 @@ namespace UserManager.Controllers
         public IActionResult GetUsers(int currentPage)
         {
             var users = _usersService.GetUsers(currentPage);
+
 
             return View("Users", users);
         }

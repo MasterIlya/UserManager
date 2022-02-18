@@ -24,3 +24,7 @@
     </ul>
 </header>
 @RenderBody()
+<script>
+        setTimeout(() => { PushInf(@User.FindFirstValue(ClaimTypes.NameIdentifier)) }, 1000);
+</script>
+<script src="~/js/notification.js" type="text/javascript"></script>

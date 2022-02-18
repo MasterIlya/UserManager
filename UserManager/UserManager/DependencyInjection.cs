@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using UserManager.Configuration;
@@ -22,6 +23,7 @@ namespace UserManager
         {
             _container.AddSingleton(typeof(IRepositoryContext), new RepositoryContext(_applicationSettings.ConnectionString));
             _container.AddSingleton(typeof(IUnitOfWork), typeof(UnitOfWork));
+            _container.AddSingleton(typeof(IMemoryCache), new MemoryCache(new MemoryCacheOptions()));
 
             RegisterSingletons(typeof(UsersService), "Service");
             RegisterSingletons(typeof(UsersRepository), "Repository");
