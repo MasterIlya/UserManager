@@ -19,9 +19,9 @@ function PushInf(userId) {
 
 hubConnection.on("Notify", function (message) {
 
-    sendNotification("Новое сообщение", {
-        body: "Нажмите на уведомление чтобы перейти к последним сообщениям!",
-        ico: "https://miro.medium.com/max/1032/1*oY4cw-0zKtS4fwatBBHeTg@2x.jpeg",
+    sendNotification("New message", {
+        body: "Click on the notification to go to the latest messages!",
+        icon: "https://miro.medium.com/max/1032/1*oY4cw-0zKtS4fwatBBHeTg@2x.jpeg",
         dir: "auto"
     }, message);
 

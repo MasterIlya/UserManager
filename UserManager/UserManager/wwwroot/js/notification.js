@@ -1,7 +1,7 @@
 function sendNotification(title, options, message) {
 
     if (!("Notification" in window)) {
-        alert('Ваш браузер не поддерживает HTML Notifications, его необходимо обновить.');
+        alert('Your browser does not support HTML Notifications, it needs to be updated.');
     }
     else if (Notification.permission === "granted") {
 
@@ -22,7 +22,7 @@ function sendNotification(title, options, message) {
                 var notification = new Notification(title, options);
 
             } else {
-                alert('Вы запретили показывать уведомления');
+                alert('You have forbidden to show notifications');
             }
         });
     }
